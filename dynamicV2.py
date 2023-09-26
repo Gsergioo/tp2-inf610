@@ -1,5 +1,4 @@
-from tp2 import Item, Node
-
+from utils import Item, Node
 
 class LinkedListV2:
     

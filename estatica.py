@@ -1,4 +1,4 @@
-from tp2 import Item
+from utils import Node, Item
 
 class LinearStaticList:
 

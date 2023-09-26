@@ -4,19 +4,8 @@ from estatica import LinearStaticList
 from dynamicV1 import LinkedListV1
 from dynamicV2 import LinkedListV2
 from dynamicV3 import LinkedListV3
+from utils import Item
 
-
-class Item:
-
-    def __init__(self, key, value) -> None:
-        self.key = key
-        self.value = value
-
-class Node:
-
-    def __init__(self, x: Item) -> None:
-        self.item = x
-        self.next_node = None
 
 class Fila: 
 
