@@ -23,8 +23,9 @@ class Fila:
         return tads[type]
     
     def queue(self, x: Item):
-        self.items.insert(x, self.size)
+        counter = self.items.insert(x, self.size)
         self.size += 1
+        return counter
 
     def dequeue(self):
         self.size -= 1
@@ -41,14 +42,17 @@ class Dicionario():
         self.size = 0
     
     def search(self, key):
+        counter = 0
         for i in range(self.queue.size):
             if self.queue.get_first().key == key:
-                return self.queue.get_first()
+                return self.queue.get_first(), counter
             else:
-                item = self.queue.dequeue()
-                self.queue.queue(item)
-        
-        return None
+                item, counter_aux = self.queue.dequeue()
+                counter += counter_aux
+                counter_aux = self.queue.queue(item)
+                counter += counter_aux
+
+        return None, counter
     
     def insert(self, item):
         self.queue.queue(item)
@@ -57,13 +61,25 @@ class Dicionario():
 
 
 if __name__ == "__main__":
-    dicionario = Dicionario("DynamicV1")
-    keys = np.random.choice(range(10000), 10000, replace=False)
-    values = np.random.choice(range(10000), 10000, replace=False)
+    dicionario = Dicionario("DynamicV3")
+    keys = np.random.choice(range(10000), 10, replace=False)
+    values = np.random.choice(range(10000), 10, replace=False)
     items = [Item(item[0], item[1]) for item in zip(keys, values)]
     
     for item in items:
         dicionario.insert(item)
 
-    a = dicionario.search(10) 
-    print(a)
+    lista = dicionario.queue.items 
+    lista.show()
+    print()
+    lista.insert(Item(11, 11), 10)
+    lista.show()
+    lista.remove(10)
+    print()
+    lista.show()
+    print(lista.last.item.value)
+
+
+    #a, counter = dicionario.search(10) 
+    #print(a)
+    #print(counter)
