@@ -11,16 +11,18 @@ class LinkedListV3:
         node = Node(x)
         counter = 1
         if pos == self.size:
+            self.size += 1
             self.last.next_node = node
             self.last = self.last.next_node
             return counter
 
         pointer = self.head
-        while pos:
+        while pos - 1:
             counter += 1
             pointer = pointer.next_node
             pos -= 1
 
+        counter += 3
         next_node = pointer.next_node
         pointer.next_node = node
         node.next_node = next_node
@@ -31,7 +33,7 @@ class LinkedListV3:
         return counter
 
     def locate(self, pos):
-        if not self.node:
+        if not self.head:
             return -1
         
         node = self.head.next_node
@@ -46,7 +48,6 @@ class LinkedListV3:
         counter = 1
         if not self.head.next_node:
             print("A lista está vazia. Não é possível remover.")
-            self.size -= 1
             return counter
 
         anterior = self.head
@@ -55,6 +56,8 @@ class LinkedListV3:
 
         while atual:
             if contador == pos:
+                self.size -= 1
+                counter += 1
                 anterior.next_node = atual.next_node
                 if pos == self.size:
                     self.last = anterior

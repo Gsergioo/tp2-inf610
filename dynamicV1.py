@@ -8,7 +8,8 @@ class LinkedListV1:
     def insert(self, x: Item, pos): 
         counter = 1
         node = Node(x)
-        if pos == 0 and self.node != None:   
+        if pos == 0 and self.node != None:
+            counter += 1   
             node.next_node = self.node
             self.node = node
             return counter
@@ -21,7 +22,8 @@ class LinkedListV1:
             counter += 1
             pointer = pointer.next_node
             pos -= 1
-        
+
+        counter += 3
         next_node = pointer.next_node
         pointer.next_node = node
         node.next_node = next_node
@@ -47,6 +49,7 @@ class LinkedListV1:
             return -1
 
         if pos == 0:
+            counter += 1
             node = self.node
             self.node = self.node.next_node
             return node, counter
@@ -57,6 +60,7 @@ class LinkedListV1:
         while atual:
             counter += 1
             if contador == pos:
+                counter += 1
                 anterior.proximo = atual.proximo
                 self.size -= 1
                 return atual, counter

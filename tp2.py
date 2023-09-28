@@ -1,9 +1,14 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
+
 
 from estatica import LinearStaticList
 from dynamicV1 import LinkedListV1
 from dynamicV2 import LinkedListV2
 from dynamicV3 import LinkedListV3
+from dynamicV4 import LinkedListV4
 from utils import Item
 
 
@@ -18,7 +23,8 @@ class Fila:
             "LinearStatic": LinearStaticList(),
             "DynamicV1": LinkedListV1(),
             "DynamicV2": LinkedListV2(),
-            "DynamicV3": LinkedListV3()
+            "DynamicV3": LinkedListV3(),
+            "DynamicV4": LinkedListV4()
         }
         return tads[type]
     
@@ -57,29 +63,34 @@ class Dicionario():
     def insert(self, item):
         self.queue.queue(item)
         self.size += 1
-        
-
 
 if __name__ == "__main__":
-    dicionario = Dicionario("DynamicV3")
-    keys = np.random.choice(range(10000), 10, replace=False)
-    values = np.random.choice(range(10000), 10, replace=False)
-    items = [Item(item[0], item[1]) for item in zip(keys, values)]
-    
-    for item in items:
-        dicionario.insert(item)
+    vv = []
+    for i in range(10, 1000, 100):
+        print(i)
+        keys = np.random.choice(range(i), i, replace=False)
+        values = np.random.choice(range(i), i, replace=False)
+        items = [Item(item[0], item[1]) for item in zip(keys, values)]
 
-    lista = dicionario.queue.items 
-    lista.show()
-    print()
-    lista.insert(Item(11, 11), 10)
-    lista.show()
-    lista.remove(10)
-    print()
-    lista.show()
-    print(lista.last.item.value)
+        v = []
+        for list_type in ["LinearStatic", "DynamicV1", "DynamicV2", "DynamicV3", "DynamicV4"]:
+            dicionario = Dicionario(list_type)
+            for item in items:
+                dicionario.insert(item)
 
+            a, counter = dicionario.search(keys[-1]) 
+            v.append(counter) 
+        vv.append(v)    
 
-    #a, counter = dicionario.search(10) 
-    #print(a)
-    #print(counter)
+    x = [x for x in range(10, 1000, 100)]
+
+    for i in range(5):
+        y = [a[i] for a in vv]
+        print("AAA")
+        print(len(x))
+        print(len(y))
+        sns.lineplot(x=x, y=y)
+
+    plt.show()
+
+     

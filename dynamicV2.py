@@ -29,6 +29,7 @@ class LinkedListV2:
             pointer = pointer.next_node
             pos -= 1
 
+        counter += 3
         next_node = pointer.next_node
         pointer.next_node = node
         node.next_node = next_node
@@ -67,6 +68,7 @@ class LinkedListV2:
         while atual:
             counter += 1
             if contador == pos:
+                counter += 1
                 anterior.proximo = atual.proximo
                 self.size -= 1
                 return counter, atual.item
